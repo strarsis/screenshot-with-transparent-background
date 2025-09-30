@@ -34,6 +34,13 @@ async function takeScreenshot(url, image) {
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto(url);
+  /*
+  // pre-process example
+  await page.evaluate(() => {
+    document.body.style.background = 'none';
+    document.body.style.backgroundColor = 'transparent';
+  });
+  */
   await page.screenshot({
     path: image,
 

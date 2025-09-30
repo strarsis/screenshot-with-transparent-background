@@ -6,16 +6,19 @@ import { hideBin } from 'yargs/helpers';
 async function main() {
   const argv = yargs(hideBin(process.argv))
   .usage('Usage: $0 screenshot [url] [image]')
-  .command('screenshot [url] [image]', 'Take screenshot from URL to image file', (yargs) => {
-    return yargs
-      .positional('url', {
-        describe: 'URL to take screenshot from',
-        default: 'https://strarsis.github.io/screenshot-with-transparent-background/sample.html',
-      })
-      .positional('image', {
-        describe: 'Path to write image file to',
-        default: './screenshot.png',
-      })
+  .command(
+    ['screenshot [url] [image]', '*'],
+    'Take screenshot from URL to image file',
+    (yargs) => {
+      return yargs
+        .positional('url', {
+          describe: 'URL to take screenshot from',
+          default: 'https://strarsis.github.io/screenshot-with-transparent-background/sample.html',
+        })
+        .positional('image', {
+          describe: 'Path to write image file to',
+          default: './screenshot.png',
+        });
   }, async (argv) => {
     console.warn('Taking screenshot from ' + argv.url + ' to ' + argv.image + '...');
     await takeScreenshot(argv.url, argv.image);

@@ -10,7 +10,9 @@
 4. Install node dependencies:
 `npm install`
 5. Invoke the script:
+
 `node index.js` # example defaults (sample page to `screenshot.png`).
+
 `node index.js https://www.example.com output.png`
 
 ## Engine

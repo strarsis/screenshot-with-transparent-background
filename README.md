@@ -17,6 +17,4 @@
 The script uses the `chromium` engine.
 Playwright also supports `webkit` and `firefox`.
 The engine can be modified easily:
-[````
-import { chromium as engine } from 'playwright';
-```](https://github.com/strarsis/screenshot-with-transparent-background/blob/f103bce967fbf6663a55af28b9320f98a3edcdf3/index.js#L2)
+https://github.com/strarsis/screenshot-with-transparent-background/blob/f103bce967fbf6663a55af28b9320f98a3edcdf3/index.js#L2

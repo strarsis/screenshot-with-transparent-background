@@ -15,6 +15,6 @@
 
 ## Engine
 The script uses the `chromium` engine.
-Playwright also supports `webkit` and `firefox`.
-The engine can be modified easily:
+Playwright also supports `Webkit` and `Firefox`.
+The engine to be used can be modified easily, just replace `chromium` with `webkit` or `firefox`.
 https://github.com/strarsis/screenshot-with-transparent-background/blob/f103bce967fbf6663a55af28b9320f98a3edcdf3/index.js#L2

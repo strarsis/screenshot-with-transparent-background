@@ -5,11 +5,11 @@
 `git clone https://github.com/strarsis/screenshot-with-transparent-background`
 2. (cwd into it)
 `cd screenshot-with-transparent-background`
-3. (optional) Install + use node LTS version using `nvm`
+3. (optional) Install + use node LTS version using `nvm`:
 `nvm install && nvm use`
-4. Install node dependencies
+4. Install node dependencies:
 `npm install`
-5. Invoke the script
+5. Invoke the script:
 `node index.js` # example defaults (sample page to `screenshot.png`).
 `node index.js https://www.example.com output.png`
 

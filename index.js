@@ -1,53 +1,44 @@
 #!/usr/bin/env node
+import { chromium as engine } from 'playwright';
+import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers';
 
-const puppeteer = require('puppeteer');
-const argv      = require('yargs').argv
-
-require('yargs') // eslint-disable-line
+async function main() {
+  const argv = yargs(hideBin(process.argv))
   .usage('Usage: $0 screenshot [url] [image]')
   .command('screenshot [url] [image]', 'Take screenshot from URL to image file', (yargs) => {
-    yargs
+    return yargs
       .positional('url', {
         describe: 'URL to take screenshot from',
-        default: 'https://example.com',
+        default: 'https://strarsis.github.io/screenshot-with-transparent-background/sample.html',
       })
       .positional('image', {
         describe: 'Path to write image file to',
         default: './screenshot.png',
       })
-  }, (argv) => {
+  }, async (argv) => {
     console.warn('Taking screenshot from ' + argv.url + ' to ' + argv.image + '...');
-    return takeScreenshot(argv.url, argv.image)
-    .then(() => {
-      console.warn('Done.');
-    });
+    await takeScreenshot(argv.url, argv.image);
+    console.warn('Done.');
   })
-  .argv;
+  .demandCommand(1, 'You need to specify a command')
+  .help()
+  .parse();
+}
 
 async function takeScreenshot(url, image) {
-
-  const chromiumBinPath = '/usr/bin/chromium-browser';
-  const browser = await puppeteer.launch({
-    args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--single-process',
-
-        '--ignore-certificate-errors',
-    ],
-    //pipe: true,
-    ignoreHTTPSErrors: true,
-    headless: true,
-    executablePath: chromiumBinPath,
-  });
-  const page = await browser.newPage();
+  const browser = await engine.launch();
+  const context = await browser.newContext();
+  const page = await context.newPage();
   await page.goto(url);
   await page.screenshot({
-      path: image,
-      omitBackground: true
+    path: image,
+
+    // important for transparent screenshots
+    omitBackground: true,
+    type: 'png',
   });
-
   await browser.close();
-
 }
+
+main();
